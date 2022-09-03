@@ -41,7 +41,7 @@ jobs:
         with:
           name: Build output
           path: |
-            c:/wx/cmake/build/static/release/wxMSW-3.2.0_gcc1120_x64_Dev.7z
+            c:/wx/cmake/build/static/release/lib/wxMSW-3.2.0_gcc1120_x64_Dev.7z
       - name: Upload application file to release
         uses: svenstaro/upload-release-action@v2
         with:
