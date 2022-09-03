@@ -1,0 +1,51 @@
+name: CMake
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  # workflow_dispatch:
+  
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  build-windows:
+    name: C++/Win32 (windows22 image)
+
+    runs-on: windows-2022
+
+    env:
+      wxMSW_VER: 3.2.0
+      WXWIN: c:\wx
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install wxWidgets
+        run: |
+          mkdir ${env:WXWIN} | Out-Null
+          cd ${env:WXWIN}
+          curl -OL https://github.com/wxWidgets/wxWidgets/releases/download/v${env:wxMSW_VER}/wxWidgets-${env:wxMSW_VER}.7z  
+          7z x wxWidgets-${env:wxMSW_VER}.7z
+          cmake . -G "MinGW Makefiles" -B ./cmake/build/static/release -DCMAKE_BUILD_TYPE=RELEASE -DwxBUILD_SHARED=OFF -DwxBUILD_PRECOMP:BOOL=OFF 
+          cd cmake/build/static/release
+          make -j8
+          cd lib
+          7z a wxMSW-3.2.0_gcc1120_x64_Dev.7z gcc_x64_lib
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build output
+          path: |
+            c:/wx/cmake/build/static/release/wxMSW-3.2.0_gcc1120_x64_Dev.7z
+      - name: Upload application file to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: wxMSW-3.2.0_gcc1120_x64_Dev.7z
+          asset_name: wxMSW-$tag_gcc1120_x64_Dev.7z
+          tag: ${{ github.ref }}
