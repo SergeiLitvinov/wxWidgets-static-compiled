@@ -35,8 +35,10 @@ jobs:
           cmake . -G "MinGW Makefiles" -B ./cmake/build/static -DCMAKE_BUILD_TYPE=DEBUG -DwxBUILD_SHARED=OFF -DwxBUILD_PRECOMP:BOOL=OFF 
           cd cmake/build/static
           make -j8 BUILD=release       
+          make install -j8
           make -j8 BUILD=debug
-          ls
+          make install -j8
+          cd "C:/Program Files (x86)/wxWidgets"
           7z a wxMSW-3.2.0_gcc1120_x64_Dev.7z lib/gcc_x64_lib
           7z a wxWidgets-3.2.0-headers.7z include
       - name: Archive production artifacts
@@ -44,5 +46,5 @@ jobs:
         with:
           name: Build output
           path: |
-            c:/wx/cmake/build/static/wxMSW-3.2.0_gcc1120_x64_Dev.7z
-            c:/wx/cmake/build/static/wxWidgets-3.2.0-headers.7z
+            "C:/Program Files (x86)/wxWidgets/wxMSW-3.2.0_gcc1120_x64_Dev.7z"
+            "C:/Program Files (x86)/wxWidgets/wxWidgets-3.2.0-headers.7z"
