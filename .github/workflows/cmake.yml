@@ -50,5 +50,5 @@ jobs:
         with:
           name: Build output
           path: |
-            "C:\Program Files (x86)\wxWidgets\wxMSW-3.2.0_gcc1120_x64_Dev.7z"
-            "C:\Program Files (x86)\wxWidgets\wxWidgets-3.2.0-headers.7z"
+            C:/Program Files (x86)/wxWidgets/wxMSW-3.2.0_gcc1120_x64_Dev.7z
+            C:/Program Files (x86)/wxWidgets/wxWidgets-3.2.0-headers.7z
