@@ -36,7 +36,7 @@ jobs:
           make -j8
           make install -j8
           make clean
-          cd ..
+          cd ${env:WXWIN}
           cmake . -G "MinGW Makefiles" -B ./cmake/build/static -DCMAKE_BUILD_TYPE=DEBUG -DwxBUILD_SHARED=OFF -DwxBUILD_PRECOMP:BOOL=OFF 
           cd cmake/build/static
           make -j8 
