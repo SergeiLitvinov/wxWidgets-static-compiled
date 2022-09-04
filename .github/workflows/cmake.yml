@@ -44,7 +44,6 @@ jobs:
           cd "C:/Program Files (x86)/wxWidgets"
           7z a wxMSW-3.2.0_gcc1120_x64_Dev.7z lib/gcc_x64_lib
           7z a wxWidgets-3.2.0-headers.7z include
-          ls
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
         with:
