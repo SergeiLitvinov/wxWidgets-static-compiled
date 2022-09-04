@@ -26,14 +26,10 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: wxMSW-3.2.0_gcc1120_x64_Dev.7z
-          asset_name: wxMSW-$tag_gcc1120_x64_Dev.7z
+          files: |
+            wxMSW-3.2.0_gcc1120_x64_Dev.7z
+            wxWidgets-3.2.0-headers.7z
+          asset_name: |
+            wxMSW-$tag_gcc1120_x64_Dev.7z
+            wxWidgets-3.2.0-headers.7z
           tag: ${{ github.ref }}
-      - name: Upload application file to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: wxWidgets-3.2.0-headers.7z
-          asset_name: wxWidgets-3.2.0-headers.7z
-          tag: ${{ github.ref }}
-        
